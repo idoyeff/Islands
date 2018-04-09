@@ -1,0 +1,10 @@
+<div>
+  <table id="islands_table">
+      <tr *ngFor="let nElement of matrix">
+          <td *ngFor="let mElement of nElement">{{nElement[mElement]}}</td>
+      </tr>       
+  </table>
+
+  <button (click) = myEvent1($event)>My Button1</button>
+  <button (click) = myEvent2($event)>My Button2</button>
+</div>

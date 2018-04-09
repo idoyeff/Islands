@@ -1,0 +1,60 @@
+
+.islands-form-frame{    
+    height: 800px;
+    width: 600px;
+    margin: auto;
+    border: black 2px groove;
+    border-radius: 6px;
+    background-color: white;
+}
+
+.enter-bitmap-size-container{
+    text-align:center; 
+    margin-top: 50%; 
+    font-size: 20px;
+}
+
+.enter-bitmap-size{
+    font-weight: bold;
+}
+
+.bitmap-size-input{
+    text-align:center; 
+    margin-top: 20px; 
+    font-size: 20px;
+} 
+
+.error-message-contanier{
+    margin-left: 225px; 
+    position: absolute;
+}
+
+.error-message{
+    color: red; 
+    font-size: 12px;
+}
+
+.input-properties{
+    border-radius: 8px; 
+    border: solid black 1px; 
+    height: 25px;
+}
+
+.button-properties{
+    background-color: steelblue;
+    color: white;
+    border: black;
+    border-radius: 8px;
+    height: 28px;
+    width: 100px;
+}
+
+.randomize-button-container{
+    text-align:center; 
+    margin-top: 20px;
+}
+
+.create-button-container{
+    text-align:center; 
+    margin-top: 10px;
+}

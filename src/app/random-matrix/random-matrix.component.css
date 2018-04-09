@@ -1,0 +1,22 @@
+#islands_table { border:5px solid #333; }
+#islands_table td {
+    background:#fff;
+    background:-moz-linear-gradient(top, #fff, #eee);
+    background:-webkit-gradient(linear,0 0, 0 100%, from(#fff), to(#eee));
+    box-shadow:inset 0 0 0 1px #fff;
+    -moz-box-shadow:inset 0 0 0 1px #fff;
+    -webkit-box-shadow:inset 0 0 0 1px #fff;
+    height:20px;
+    text-align:center;
+    vertical-align:middle;
+    width:20px;
+}
+#islands_table tr:nth-child(odd) td:nth-child(even),
+#islands_table tr:nth-child(even) td:nth-child(odd) {
+    background:#ccc;
+    background:-moz-linear-gradient(top, #ccc, #eee);
+    background:-webkit-gradient(linear,0 0, 0 100%, from(#ccc), to(#eee));
+    box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+    -moz-box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+    -webkit-box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+}
