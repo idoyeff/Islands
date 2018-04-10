@@ -1,22 +1,30 @@
-#islands_table { border:5px solid #333; }
-#islands_table td {
-    background:#fff;
-    background:-moz-linear-gradient(top, #fff, #eee);
-    background:-webkit-gradient(linear,0 0, 0 100%, from(#fff), to(#eee));
-    box-shadow:inset 0 0 0 1px #fff;
-    -moz-box-shadow:inset 0 0 0 1px #fff;
-    -webkit-box-shadow:inset 0 0 0 1px #fff;
+#islands_table { border:5px solid #333; border-collapse: collapse; }
+
+#islands_table td {    
     height:20px;
+    width:20px;    
     text-align:center;
     vertical-align:middle;
-    width:20px;
+    border: black 1px solid;
+    margin: 0;
+    padding: 0;
 }
-#islands_table tr:nth-child(odd) td:nth-child(even),
-#islands_table tr:nth-child(even) td:nth-child(odd) {
-    background:#ccc;
-    background:-moz-linear-gradient(top, #ccc, #eee);
-    background:-webkit-gradient(linear,0 0, 0 100%, from(#ccc), to(#eee));
-    box-shadow:inset 0 0 10px rgba(0,0,0,.4);
-    -moz-box-shadow:inset 0 0 10px rgba(0,0,0,.4);
-    -webkit-box-shadow:inset 0 0 10px rgba(0,0,0,.4);
+
+.random-matrix-container{
+    text-align:center; 
+    margin-top: 100px; 
+}
+
+.solve-button-container{
+    text-align:center; 
+    margin-top: 20px;
+}
+
+.button-properties{
+    background-color: steelblue;
+    color: white;
+    border: black;
+    border-radius: 8px;
+    height: 28px;
+    width: 100px;
 }

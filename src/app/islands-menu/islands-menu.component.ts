@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router'
 import { IslandsService } from '.././islands.service';
 
 @Component({
@@ -8,11 +9,12 @@ import { IslandsService } from '.././islands.service';
 })
 export class IslandsMenuComponent implements OnInit {
   errorMessage = false;
+  appRouted = false;
   rowSize;
   columnSize;  
   rawMatrixSize: string; 
 
-  constructor(private islandsService:IslandsService) { 
+  constructor(private islandsService:IslandsService, private router: RouterModule) { 
     
   }
 
@@ -40,20 +42,13 @@ export class IslandsMenuComponent implements OnInit {
     return false;    
   }
   
-  randomizeMatrix(){
+  loadMatrix(){     
     if(!this.validateBitmapSize()){
       return false;
     }
-    
-    //route to randomize component
 
-  }
-
-  createMatrix(){
-    if(!this.validateBitmapSize()){
-      return false;
-    }
-    
-    //route to create component
-  }  
+    this.islandsService.setMatrixSize(this.rowSize, this.columnSize).then(result => {      
+      this.appRouted = true;
+    });    
+  } 
 }

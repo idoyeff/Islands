@@ -1,19 +1,32 @@
 <div class="islands-form-frame">
-    <div class="enter-bitmap-size-container">
-        <span class="enter-bitmap-size">Please enter bitmap size:</span>
+    <div [hidden]="appRouted">
+        <div class="enter-bitmap-size-container">
+            <span class="enter-bitmap-size">Please enter bitmap size:</span>
+        </div>
+        <div class="bitmap-size-input">
+            <input class="input-properties" [(ngModel)]="rawMatrixSize" type="text" placeholder=" Bitmap size: n, m">
+        </div>
+        <div class="error-message-contanier">
+            <span [hidden]="!errorMessage" class="error-message">please enter a valid bitmap size!</span>
+        </div>
+        <div class="randomize-button-container">
+            <a routerLink="/random">
+                <button class="button-properties" [disabled]="!rawMatrixSize" (click) = loadMatrix()>Randomize</button>        
+            </a>
+        </div>
+        <div class="create-button-container">
+            <a routerLink="/create">
+                <button class="button-properties"  [disabled]="!rawMatrixSize" (click) = loadMatrix()>Draw</button>
+            </a>
+        </div>
     </div>
-    <div class="bitmap-size-input">
-        <input class="input-properties" [(ngModel)]="rawMatrixSize" type="text" placeholder=" Bitmap size: n, m">
-    </div>
-    <div class="error-message-contanier">
-        <span [hidden]="!errorMessage" class="error-message">please enter a valid bitmap size!</span>
-    </div>
-    <div class="randomize-button-container">
-        <button class="button-properties" [disabled]="!rawMatrixSize" (click) = randomizeMatrix()>Randomize</button>        
-    </div>
-    <div class="create-button-container">
-        <button class="button-properties"  [disabled]="!rawMatrixSize" (click) = drawMatrix()>Draw</button>
+
+    <div [hidden]="!appRouted">
+        <router-outlet></router-outlet>
     </div>
 </div>
+
+
+
 
 
