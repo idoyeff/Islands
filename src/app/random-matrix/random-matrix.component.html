@@ -2,18 +2,11 @@
   <div class="random-matrix-container">
     <table id="islands_table" style="margin: auto;">
       <tr *ngFor="let nElement of matrix">
-          <td *ngFor="let mElement of nElement" [style.background-color]="nElement[mElement] == 1? 'black' : 'white'"></td>
+          <td *ngFor="let mElement of nElement" [style.background-color]="getColor(mElement)"></td>
       </tr>       
     </table>
   </div>
   <div class="solve-button-container">     
-    <button class="button-properties" (click) = solveMatrix()>Solve</button>        
-  </div>
-  
-  <!--<a routerLink="/menu">
-    <button (click) = myEvent1($event)>My Button1</button>
-  </a>
-  <a routerLink="/menu">
-    <button (click) = myEvent2($event)>My Button2</button>
-  </a>-->
+    <button class="button-properties" (click) = solve()>Solve</button>        
+  </div> 
 </div>

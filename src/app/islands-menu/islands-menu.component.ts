@@ -47,8 +47,7 @@ export class IslandsMenuComponent implements OnInit {
       return false;
     }
 
-    this.islandsService.setMatrixSize(this.rowSize, this.columnSize).then(result => {      
-      this.appRouted = true;
-    });    
+    this.islandsService.setMatrixSize(this.rowSize, this.columnSize);   
+    this.appRouted = true;
   } 
 }

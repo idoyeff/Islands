@@ -10,7 +10,7 @@ export class RandomMatrixComponent implements OnInit {
   matrix = [];
   islandsFound = 0;
   appRouted = true;
-  blackIslandStyle = 'background-color: black';
+  randomColors: string[] = ['white', 'black'];
 
   constructor(private islandsService:IslandsService) { }
 
@@ -19,15 +19,14 @@ export class RandomMatrixComponent implements OnInit {
   }
 
   solve(){
-    this.islandsService.findIslands().then(result => {
-      var testResult = result;
-      this.islandsFound;// = result.numOfIslands;
-      this.matrix;// = result.matrix;
-    });    
+    var result = this.islandsService.findIslands();
+    this.islandsFound = result.numOfIslands;
+    this.matrix = result.matrix;
+
+    this.randomColors = this.islandsService.generateRandomColors(this.islandsFound);
   }
 
-  myEvent1(){
-    this.appRouted = false;
-  }
-
+  getColor(islandNumber){
+    return this.randomColors[islandNumber];
+  } 
 }

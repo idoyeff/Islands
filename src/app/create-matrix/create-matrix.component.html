@@ -1,3 +1,12 @@
-<p>
-  create-matrix works!
-</p>
+<div>
+  <div class="create-matrix-container">
+    <table id="islands_table" style="margin: auto;">
+      <tr *ngFor="let nElement of matrix; let i = index">
+          <td *ngFor="let mElement of nElement; let j = index" (mousedown)="markCell(i, j)" [style.background-color]="getColor(mElement)"></td>
+      </tr>       
+    </table>
+  </div>
+  <div class="solve-button-container">     
+    <button class="button-properties" (click) = solve()>Solve</button>        
+  </div> 
+</div>
