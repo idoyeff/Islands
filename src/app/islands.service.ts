@@ -47,7 +47,7 @@ export class IslandsService {
         tableHeight = 600;
       }
       
-      return (340 - tableHeight / 2) + 'px';
+      return (300 - tableHeight / 2) + 'px';
   }
 
   findIslands() {
