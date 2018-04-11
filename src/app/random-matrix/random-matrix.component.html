@@ -1,22 +1,27 @@
-<div>
-  <div class="random-matrix-container">
-    <table id="islands_table" style="margin: auto;">
-      <tr *ngFor="let nElement of matrix">
-          <td *ngFor="let mElement of nElement" [style.background-color]="getColor(mElement)"></td>
-      </tr>       
-    </table>
+<div>  
+  <div class="islands-table-container">
+    <div >
+      <table class="islands-table" [style.margin-top]="tableMarginTop">
+        <tr *ngFor="let nElement of matrix">
+            <td *ngFor="let mElement of nElement" [style.background-color]="getColor(mElement)"></td>
+        </tr>       
+      </table>   
+    </div>       
   </div>
-  <div class="solve-button-container">     
-    <button class="button-properties" (click) = solve()>SOLVE</button>        
-  </div> 
+  <div style="position: absolute; margin-left: 225px; margin-top: 10px; font-weight: bold;">
+      <span [hidden]="islandsFound === -1" class="islands-found-message">FOUND {{islandsFound}} ISLANDS!</span>    
+  </div>  
+  
 
-  <div class="restart-button-container">      
+  <div class="solve-button-container">     
+    <button class="button-properties" (click) = solve() [disabled]="islandsFound !== -1" >SOLVE </button>        
+  </div> 
+  <div class="shuffle-button-container">      
     <button class="button-properties" (click)="shuffleMatrix()">SHUFFLE</button>
   </div>
-
   <div class="restart-button-container">
       <a routerLink="/">
-          <button class="button-properties">RESTART</button>
+          <button class="button-properties" (click)="initializeSolution()">RESTART</button>
       </a>
   </div>
 </div>

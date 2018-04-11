@@ -1,23 +1,11 @@
-#islands_table { border:5px solid #333; border-collapse: collapse; }
-
-#islands_table td {    
-    height:20px;
-    width:20px;    
-    text-align:center;
-    vertical-align:middle;
-    border: black 1px solid;
-    margin: 0;
-    padding: 0;
-}
-
-.random-matrix-container{
-    text-align:center; 
-    margin-top: 100px; 
-}
-
 .solve-button-container{
     text-align:center; 
-    margin-top: 20px;
+    margin-top: 40px;
+}
+
+.shuffle-button-container{
+    text-align:center; 
+    margin-top: 10px;
 }
 
 .restart-button-container{
@@ -25,11 +13,4 @@
     margin-top: 10px;
 }
 
-.button-properties{
-    background-color: steelblue;
-    color: white;
-    border: black;
-    border-radius: 8px;
-    height: 28px;
-    width: 100px;
-}
+

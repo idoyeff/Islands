@@ -1,0 +1,53 @@
+.islands-table-container{
+    text-align:center; 
+    overflow: auto;
+    overflow-y: auto;
+    overflow-x: auto;
+    max-height: 600px;
+    max-width: 600px;
+    height: 600px;
+
+}
+
+.islands-table { 
+    border:5px solid #333; 
+    border-collapse: collapse; 
+    table-layout: fixed;
+    margin: auto;
+}
+
+.islands-table td{
+    height:20px;
+    width:20px;    
+    min-width: 20px;
+    border: black 1px solid;
+    margin: 0;
+    padding: 0;
+}
+
+.button-properties{
+    background-color: steelblue;
+    color: white;
+    border: black;
+    border-radius: 8px;
+    height: 28px;
+    width: 100px;
+}
+
+.button-properties:hover:enabled{
+    background-color: white;
+    color: black;
+    border: steelblue 1px solid;
+    cursor: pointer;
+}
+
+.button-properties:hover:disabled{
+    cursor: not-allowed;
+}
+
+.island-found-message{
+    position: absolute; 
+    margin-left: 225px; 
+    margin-top: 10px; 
+    font-weight: bold;
+} 

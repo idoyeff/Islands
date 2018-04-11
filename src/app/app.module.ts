@@ -9,6 +9,8 @@ import { RandomMatrixComponent } from './random-matrix/random-matrix.component';
 import { CreateMatrixComponent } from './create-matrix/create-matrix.component';
 
 import { IslandsService } from './islands.service';
+import { UtilitiesService } from './utilities.service';
+import { MatrixGeneratorService } from './matrix-generator.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,7 @@ import { IslandsService } from './islands.service';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    FormsModule,    
     RouterModule.forRoot([
       {
         path: '',
@@ -43,7 +45,11 @@ import { IslandsService } from './islands.service';
       }
     ])
   ],
-  providers: [IslandsService],
+  providers: [
+    IslandsService, 
+    UtilitiesService,
+    MatrixGeneratorService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

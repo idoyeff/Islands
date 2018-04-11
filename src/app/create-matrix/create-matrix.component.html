@@ -1,13 +1,21 @@
 <div>
-  <div class="create-matrix-container">
-    <table id="islands_table" style="margin: auto;">
+  <div class="islands-table-container">
+    <table class="islands-table" [style.margin-top]="tableMarginTop">
       <tr *ngFor="let nElement of matrix; let i = index">
-          <td *ngFor="let mElement of nElement; let j = index" (mousedown)="markCell(i, j)" [style.background-color]="getColor(mElement)"></td>
+          <td *ngFor="let mElement of nElement; let j = index" (click)="cellClicked(i, j)" (mousemove)="drawCells(i, j, $event)" [style.background-color]="getColor(mElement)"></td>
       </tr>       
     </table>
   </div>
+  <div class="island-found-message">
+    <span [hidden]="islandsFound === -1" class="islands-found-message">FOUND {{islandsFound}} ISLANDS!</span>    
+  </div>  
+
+
   <div class="solve-button-container">     
-    <button class="button-properties" (click) = solve()>SOLVE</button>        
+    <button class="button-properties" (click) = solve() [disabled]="problemSolved" >SOLVE</button>        
+  </div> 
+  <div class="clean-button-container">     
+    <button class="button-properties" (click) = clean()>CLEAN</button>        
   </div> 
   <div class="restart-button-container">
       <a routerLink="/">

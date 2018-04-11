@@ -5,18 +5,19 @@ import { IslandsService } from '.././islands.service';
 @Component({
   selector: 'app-islands-menu',
   templateUrl: './islands-menu.component.html',
-  styleUrls: ['./islands-menu.component.css']
+  styleUrls: ['.././app.component.css', './islands-menu.component.css']
 })
 export class IslandsMenuComponent implements OnInit {
   errorMessage = false;
+  zeroValueErrorMessage = false;
+  
   appRouted = false;
   rowSize;
   columnSize;  
   rawMatrixSize: string; 
   placeholder= 'Bitmap size: n, m';
 
-  constructor(private islandsService:IslandsService, private router: RouterModule) { 
-    
+  constructor(private islandsService:IslandsService, private router: RouterModule) {     
   }
 
   ngOnInit() {
@@ -24,13 +25,15 @@ export class IslandsMenuComponent implements OnInit {
 
   validateBitmapSize(){
     if(!this.rawMatrixSize){
+      this.errorMessage = true;
       return false;
     }
 
     this.rawMatrixSize = this.rawMatrixSize.trim();
     var matrixSizeProperties = this.rawMatrixSize.split(/[ ,]+/);
 
-    if(matrixSizeProperties.length != 2){      
+    if(matrixSizeProperties.length != 2){     
+        this.errorMessage = true; 
         return false;      
     }   
 
@@ -40,13 +43,14 @@ export class IslandsMenuComponent implements OnInit {
     if(this.rowSize > 0 && this.columnSize > 0){
       return true;
     }
-
-    return false;    
+    else{
+      this.zeroValueErrorMessage = true;
+      return false;
+    }    
   }
   
   loadMatrix(){     
-    if(!this.validateBitmapSize()){
-      this.errorMessage = true;
+    if(!this.validateBitmapSize()){      
       return;
     }
 
@@ -57,6 +61,7 @@ export class IslandsMenuComponent implements OnInit {
   onInputFocus(){
     this.placeholder='';
     this.errorMessage = false;
+    this.zeroValueErrorMessage = false;
   }
 
   onInputBlur(){

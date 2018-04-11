@@ -8,7 +8,9 @@
         </div>
         <div class="error-message-contanier">
             <span [hidden]="!errorMessage" class="error-message">please enter a valid bitmap size!</span>
+            <span [hidden]="!zeroValueErrorMessage" class="error-message">Size n and m cannot be equal to 0</span>
         </div>
+        
         <div class="randomize-button-container">
             <a routerLink="/random">
                 <button class="button-properties" [disabled]="!rawMatrixSize" (click) = loadMatrix()>RANDOMIZE</button>        

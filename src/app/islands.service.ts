@@ -1,103 +1,66 @@
 import { Injectable } from '@angular/core';
+import { MatrixGeneratorService } from './matrix-generator.service';
 
 @Injectable()
 export class IslandsService {
   matrix = [];
   rowSize = 0;
   columnSize = 0;
-  islandsCounter = 2;
+  islandsCounter = 2;  
 
-  constructor() { }
+  constructor(private matrixGeneratorService:MatrixGeneratorService) { }
 
   getRandomIslandsMatrix() {
-    var result = [];
-
-    for (var i = 0; i<this.columnSize; i++){
-      var row = [];
-      for (var j= 0; j<this.rowSize; j++){        
-        row.push(Math.round(Math.random()));        
-      }    
-      result.push(row);
-    }
-
-    this.matrix = result;
-    return result;
-  }
-
-  setMatrixSize(rowSize, columnSize){
-   return new Promise(resolve => {
-      this.rowSize = rowSize;
-      this.columnSize = columnSize; 
-    });     
-  }
-
-  findUnVisitedNeighbors(i, j) {
-    var neighbors = [];
-
-    if (j != this.rowSize - 1) {
-      neighbors.push([i, j + 1]);
-      if (i !== 0) {
-          neighbors.push([i - 1, j + 1]);
-      }
-      if (i !==this.columnSize - 1) {
-          neighbors.push([i + 1, j + 1]);
-      }
-    }
-    if (i !== this.columnSize - 1) {
-        neighbors.push([i + 1, j]);
-        if (j !== 0){
-          neighbors.push([i + 1, j - 1]);
-        }
-    }
-
-    return neighbors;
-  } 
-
-  generateRandomColors(colorsAmount){
-    var colors = ['white', 'black'];
-    var letters = '0123456789ABCDEF';
-    for(var i = 0; i < colorsAmount; i++){
-      var color = '#';
-      for (var j = 0; j < 6; j++){
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-
-      if(color === '#000000' || color === 'FFFFFF'){
-        i--;
-      }
-      else{
-        colors.push(color);        
-      }
-    }
-
-    return colors;
+    this.matrix = this.matrixGeneratorService.getMatrixWithRandomBinary(this.rowSize, this.columnSize);
+    return this.matrix;    
   }
 
   getEmptyIslandsMatrix(){
-    var result = [];
-
-    for (var i = 0; i<this.columnSize; i++){
-      var row = [];
-      for (var j= 0; j<this.rowSize; j++){        
-        row.push(0);        
-      }    
-      result.push(row);
-    }
-
-    this.matrix = result;
-    return result;
+    this.matrix = this.matrixGeneratorService.getEmptyMatrix(this.rowSize, this.columnSize);
+    return this.matrix;  
   }
 
- 
+  shuffleMatrix(){
+    this.initializeSolution();
+    return this.getRandomIslandsMatrix();
+  }
 
-  findIslands(){
-    var result = {numOfIslands: 0, matrix:[]};  
+  initializeSolution(){
+    this.islandsCounter = 2;
+  }
+
+  setMatrixSize(rowSize, columnSize){   
+    this.rowSize = rowSize;
+    this.columnSize = columnSize; 
+  }  
+
+  getMarginTopProperty(){
+      var tableHeight = 21 * this.columnSize + 10;
+      if (tableHeight > 600){
+        tableHeight = 600;
+      }
+      
+      return (340 - tableHeight / 2) + 'px';
+  }
+
+  findIslands() {
+    var queue = [];
+    var result = { numOfIslands: 0, matrix: [] };
 
     for (var i = 0; i < this.columnSize; i++) {
         for (var j = 0; j < this.rowSize; j++) {
             if (this.matrix[i][j] === 1) {
-                this.searchAroundPixel(i, j);
-                this.matrix[i][j] = this.islandsCounter;
+                queue.push([i, j]);
+
+                while (queue.length != 0){
+                    var cell = queue.pop();
+                    this.matrix[cell[0]][cell[1]] = this.islandsCounter;
+                    var markedNeighbors = this.findMarkedNeighbors(cell[0], cell[1]);
+                    for (var k = 0; k < markedNeighbors.length; k++) {                       
+                      queue.push([(markedNeighbors[k])[0], (markedNeighbors[k])[1]]);
+                    }
+                } 
+
                 this.islandsCounter++;
             }
         }
@@ -108,9 +71,77 @@ export class IslandsService {
     return result;
   }
 
+  findMarkedNeighbors(i, j) {
+      var neighbors = [];
 
+      if (i !== 0) {
+          if(this.matrix[i - 1][j] === 1){
+            neighbors.push([i - 1, j]);
+          } 
+         
+          if (j != 0) {
+            if(this.matrix[i - 1][j - 1] === 1){
+              neighbors.push([i - 1, j - 1]);
+            } 
+          }
+          if (j != this.rowSize - 1) {
+            if(this.matrix[i - 1][j + 1] === 1){
+              neighbors.push([i - 1, j + 1]);
+            } 
+          }
+      }
+
+      if (i !== this.columnSize - 1) {
+          if(this.matrix[i + 1][j] === 1){
+            neighbors.push([i + 1, j]);
+          }
+         
+          if (j != 0) {
+            if(this.matrix[i + 1][j - 1] === 1){
+              neighbors.push([i + 1, j - 1]);
+            }              
+          }
+          if (j != this.rowSize - 1) {
+            if(this.matrix[i + 1][j + 1] === 1){
+              neighbors.push([i + 1, j + 1]);
+            }                
+          }
+      }
+      if (j != 0) {
+        if(this.matrix[i][j - 1] === 1){
+          neighbors.push([i, j - 1]);
+        }         
+      }
+      if (j != this.rowSize - 1) {
+        if(this.matrix[i][j + 1] === 1){
+          neighbors.push([i, j + 1]);
+        }           
+      }
+
+      return neighbors;
+  }
+
+  /*recursive solution*/
+  /*findIslands(){
+    this.initializeSolution();    
+    var result = {numOfIslands: 0, matrix:[]};  
+
+    for (var i = 0; i < this.columnSize; i++) {
+        for (var j = 0; j < this.rowSize; j++) {
+            if (this.matrix[i][j] === 1) {
+                this.searchAroundCell(i, j);
+                this.matrix[i][j] = this.islandsCounter;
+                this.islandsCounter++;
+            }
+        }
+    }
+
+    result.numOfIslands = this.islandsCounter - 2;
+    result.matrix = this.matrix;
+    return result;
+  }
   
-  searchAroundPixel(n, m) {
+  searchAroundCell(n, m) {
     var neighbors = this.findNeighbors(n, m);
 
     for (var i = 0; i < neighbors.length; i++) {
@@ -119,7 +150,7 @@ export class IslandsService {
 
         if (this.matrix[nElement][mElement] === 1) {
             this.matrix[nElement][mElement] = this.islandsCounter;
-            this.searchAroundPixel(nElement, mElement);
+            this.searchAroundCell(nElement, mElement);
         }
     }
   }
@@ -153,5 +184,5 @@ export class IslandsService {
     }
 
     return neighbors;
-  }
+  }*/
 }

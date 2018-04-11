@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { IslandsService } from '.././islands.service';
+import { UtilitiesService } from '.././utilities.service';
 
 @Component({
   selector: 'app-random-matrix',
   templateUrl: './random-matrix.component.html',
-  styleUrls: ['./random-matrix.component.css']
+  styleUrls: ['.././app.component.css', './random-matrix.component.css']
 })
 export class RandomMatrixComponent implements OnInit {
   matrix = [];
-  islandsFound = 0;
+  tableMarginTop:string;
+  islandsFound = -1;
   appRouted = true;
-  randomColors: string[] = ['white', 'black'];
+  randomColors: string[] = ['white', 'black'];  
 
-  constructor(private islandsService:IslandsService) { }
+  constructor(private islandsService:IslandsService, private utilitiesService:UtilitiesService, private elementRef:ElementRef) { }
 
   ngOnInit() {
     this.matrix = this.islandsService.getRandomIslandsMatrix();
+    this.tableMarginTop = this.islandsService.getMarginTopProperty();
   }
 
   solve(){
@@ -23,7 +27,7 @@ export class RandomMatrixComponent implements OnInit {
     this.islandsFound = result.numOfIslands;
     this.matrix = result.matrix;
 
-    this.randomColors = this.islandsService.generateRandomColors(this.islandsFound);
+    this.randomColors = this.utilitiesService.generateRandomColors(this.islandsFound);
   }
 
   getColor(islandNumber){
@@ -31,6 +35,11 @@ export class RandomMatrixComponent implements OnInit {
   } 
 
   shuffleMatrix(){
-    this.matrix = this.islandsService.getRandomIslandsMatrix();
+    this.islandsFound = -1;
+    this.matrix = this.islandsService.shuffleMatrix();    
   }
+
+  initializeSolution(){
+    this.islandsService.initializeSolution();    
+  } 
 }
