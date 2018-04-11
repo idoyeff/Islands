@@ -4,19 +4,19 @@
             <span class="enter-bitmap-size">Please enter bitmap size:</span>
         </div>
         <div class="bitmap-size-input">
-            <input class="input-properties" [(ngModel)]="rawMatrixSize" type="text" placeholder=" Bitmap size: n, m">
+            <input class="input-properties" [(ngModel)]="rawMatrixSize" type="text" placeholder={{placeholder}} (focus)="onInputFocus()"  (blur)="onInputBlur()">
         </div>
         <div class="error-message-contanier">
             <span [hidden]="!errorMessage" class="error-message">please enter a valid bitmap size!</span>
         </div>
         <div class="randomize-button-container">
             <a routerLink="/random">
-                <button class="button-properties" [disabled]="!rawMatrixSize" (click) = loadMatrix()>Randomize</button>        
+                <button class="button-properties" [disabled]="!rawMatrixSize" (click) = loadMatrix()>RANDOMIZE</button>        
             </a>
         </div>
         <div class="create-button-container">
             <a routerLink="/create">
-                <button class="button-properties"  [disabled]="!rawMatrixSize" (click) = loadMatrix()>Draw</button>
+                <button class="button-properties"  [disabled]="!rawMatrixSize" (click) = loadMatrix()>DRAW</button>
             </a>
         </div>
     </div>

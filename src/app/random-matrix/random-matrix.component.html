@@ -7,6 +7,16 @@
     </table>
   </div>
   <div class="solve-button-container">     
-    <button class="button-properties" (click) = solve()>Solve</button>        
+    <button class="button-properties" (click) = solve()>SOLVE</button>        
   </div> 
+
+  <div class="restart-button-container">      
+    <button class="button-properties" (click)="shuffleMatrix()">SHUFFLE</button>
+  </div>
+
+  <div class="restart-button-container">
+      <a routerLink="/">
+          <button class="button-properties">RESTART</button>
+      </a>
+  </div>
 </div>

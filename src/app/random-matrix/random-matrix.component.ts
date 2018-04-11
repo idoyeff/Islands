@@ -29,4 +29,8 @@ export class RandomMatrixComponent implements OnInit {
   getColor(islandNumber){
     return this.randomColors[islandNumber];
   } 
+
+  shuffleMatrix(){
+    this.matrix = this.islandsService.getRandomIslandsMatrix();
+  }
 }

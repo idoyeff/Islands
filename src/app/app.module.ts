@@ -22,6 +22,14 @@ import { IslandsService } from './islands.service';
     FormsModule,
     RouterModule.forRoot([
       {
+        path: '',
+        component: IslandsMenuComponent
+      },
+      {
+        path: ' ',
+        component: IslandsMenuComponent
+      },
+      {
         path: 'menu',
         component: IslandsMenuComponent
       },

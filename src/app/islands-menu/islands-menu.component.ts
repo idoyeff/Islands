@@ -13,6 +13,7 @@ export class IslandsMenuComponent implements OnInit {
   rowSize;
   columnSize;  
   rawMatrixSize: string; 
+  placeholder= 'Bitmap size: n, m';
 
   constructor(private islandsService:IslandsService, private router: RouterModule) { 
     
@@ -26,6 +27,7 @@ export class IslandsMenuComponent implements OnInit {
       return false;
     }
 
+    this.rawMatrixSize = this.rawMatrixSize.trim();
     var matrixSizeProperties = this.rawMatrixSize.split(/[ ,]+/);
 
     if(matrixSizeProperties.length != 2){      
@@ -44,10 +46,20 @@ export class IslandsMenuComponent implements OnInit {
   
   loadMatrix(){     
     if(!this.validateBitmapSize()){
-      return false;
+      this.errorMessage = true;
+      return;
     }
 
     this.islandsService.setMatrixSize(this.rowSize, this.columnSize);   
     this.appRouted = true;
   } 
+
+  onInputFocus(){
+    this.placeholder='';
+    this.errorMessage = false;
+  }
+
+  onInputBlur(){
+    this.placeholder='Bitmap size: n, m';    
+  }
 }

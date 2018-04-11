@@ -86,7 +86,9 @@ export class IslandsService {
 
     this.matrix = result;
     return result;
-  }  
+  }
+
+ 
 
   findIslands(){
     var result = {numOfIslands: 0, matrix:[]};  
