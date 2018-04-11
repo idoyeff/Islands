@@ -1,15 +1,14 @@
 <div>
   <div class="islands-table-container">
-    <table class="islands-table" [style.margin-top]="tableMarginTop">
+    <table class="islands-table" [style.margin-top]="tableMarginTop" [style.cursor]="problemSolved? 'not-allowed' : 'pointer'">
       <tr *ngFor="let nElement of matrix; let i = index">
-          <td *ngFor="let mElement of nElement; let j = index" (click)="cellClicked(i, j)" (mousemove)="drawCells(i, j, $event)" [style.background-color]="getColor(mElement)"></td>
+          <td *ngFor="let mElement of nElement; let j = index" (click)="cellClicked(i, j)" (mouseover)="drawCells(i, j, $event)" [style.background-color]="getColor(mElement)"></td>
       </tr>       
     </table>
   </div>
   <div class="island-found-message">
     <span [hidden]="islandsFound === -1" class="islands-found-message">FOUND {{islandsFound}} ISLANDS!</span>    
   </div>  
-
 
   <div class="solve-button-container">     
     <button class="button-properties" (click) = solve() [disabled]="problemSolved" >SOLVE</button>        
@@ -18,8 +17,6 @@
     <button class="button-properties" (click) = clean()>CLEAN</button>        
   </div> 
   <div class="restart-button-container">
-      <a routerLink="/">
-          <button class="button-properties">RESTART</button>
-      </a>
+    <button [routerLink]="['/']" class="button-properties" (click)="restart()">RESTART</button>
   </div>
 </div>

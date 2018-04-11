@@ -9,7 +9,7 @@ import { IslandsService } from '.././islands.service';
 })
 export class IslandsMenuComponent implements OnInit {
   errorMessage = false;
-  zeroValueErrorMessage = false;
+  zeroValueErrorMessage = false;  
   
   appRouted = false;
   rowSize;
@@ -30,7 +30,7 @@ export class IslandsMenuComponent implements OnInit {
     }
 
     this.rawMatrixSize = this.rawMatrixSize.trim();
-    var matrixSizeProperties = this.rawMatrixSize.split(/[ ,]+/);
+    var matrixSizeProperties = this.rawMatrixSize.split(/[ ,.]+/);
 
     if(matrixSizeProperties.length != 2){     
         this.errorMessage = true; 
@@ -51,7 +51,8 @@ export class IslandsMenuComponent implements OnInit {
   
   loadMatrix(){     
     if(!this.validateBitmapSize()){      
-      return;
+      this.appRouted = false;
+      return false;
     }
 
     this.islandsService.setMatrixSize(this.rowSize, this.columnSize);   

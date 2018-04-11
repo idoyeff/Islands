@@ -40,21 +40,29 @@ export class CreateMatrixComponent implements OnInit {
     this.problemSolved = false;
   }
 
+  restart(){
+    this.islandsService.restart();
+  }
+
   getColor(islandNumber){
     return this.randomColors[islandNumber];
   } 
 
   cellClicked(i, j){
-    this.matrix[i][j] = this.matrix[i][j] === 0? 1 : 0;
+    if(!this.problemSolved) {
+      this.matrix[i][j] = this.matrix[i][j] === 0? 1 : 0;
+    }
   }
 
   drawCells(i, j, event){
-    if(event.buttons === 1 && (this.overCurrentCell[0] != i || this.overCurrentCell[1] != j)){
-      if(this.matrix[i][j] === 0){
-        this.matrix[i][j] = 1;    
+    if(!this.problemSolved) {
+      if(event.buttons === 1 && (this.overCurrentCell[0] != i || this.overCurrentCell[1] != j)){
+        if(this.matrix[i][j] === 0){
+          this.matrix[i][j] = 1;    
+        }
+      this.overCurrentCell[0] = i;
+      this.overCurrentCell[1] = j ; 
       }
-     this.overCurrentCell[0] = i;
-     this.overCurrentCell[1] = j ; 
     }
   }
 }

@@ -11,15 +11,11 @@
             <span [hidden]="!zeroValueErrorMessage" class="error-message">Size n and m cannot be equal to 0</span>
         </div>
         
-        <div class="randomize-button-container">
-            <a routerLink="/random">
-                <button class="button-properties" [disabled]="!rawMatrixSize" (click) = loadMatrix()>RANDOMIZE</button>        
-            </a>
+        <div class="randomize-button-container">            
+            <button [routerLink]="['/random']" class="button-properties" [disabled]="!rawMatrixSize" (click) = loadMatrix()>RANDOMIZE</button>        
         </div>
         <div class="create-button-container">
-            <a routerLink="/create">
-                <button class="button-properties"  [disabled]="!rawMatrixSize" (click) = loadMatrix()>DRAW</button>
-            </a>
+            <button [routerLink]="['/create']" class="button-properties"  [disabled]="!rawMatrixSize" (click) = loadMatrix()>DRAW</button>
         </div>
     </div>
 

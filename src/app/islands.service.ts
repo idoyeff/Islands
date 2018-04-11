@@ -25,7 +25,14 @@ export class IslandsService {
     return this.getRandomIslandsMatrix();
   }
 
-  initializeSolution(){
+  initializeSolution(){    
+    this.islandsCounter = 2;
+  }
+
+  restart(){
+    this.matrix = [];
+    this.rowSize = 0;
+    this.columnSize = 0;
     this.islandsCounter = 2;
   }
 

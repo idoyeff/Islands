@@ -20,8 +20,6 @@
     <button class="button-properties" (click)="shuffleMatrix()">SHUFFLE</button>
   </div>
   <div class="restart-button-container">
-      <a routerLink="/">
-          <button class="button-properties" (click)="initializeSolution()">RESTART</button>
-      </a>
+    <button [routerLink]="['/']" class="button-properties" (click)="restart()">RESTART</button>
   </div>
 </div>

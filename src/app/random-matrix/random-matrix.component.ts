@@ -38,8 +38,8 @@ export class RandomMatrixComponent implements OnInit {
     this.islandsFound = -1;
     this.matrix = this.islandsService.shuffleMatrix();    
   }
-
-  initializeSolution(){
-    this.islandsService.initializeSolution();    
-  } 
+  
+  restart(){
+    this.islandsService.restart();
+  }
 }
