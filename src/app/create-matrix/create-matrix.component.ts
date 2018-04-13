@@ -26,6 +26,10 @@ export class CreateMatrixComponent implements OnInit {
 
   constructor(private islandsService:IslandsService, private utilitiesService:UtilitiesService, private tablePagingService:TablePagingService) { } 
 
+  setKeyPage(direction, event){
+    var x= 2;
+  }
+
   ngOnInit() {
     this.matrix = this.islandsService.getEmptyIslandsMatrix();
     this.tableMarginTop = this.islandsService.getMarginTopProperty();
@@ -89,5 +93,10 @@ export class CreateMatrixComponent implements OnInit {
       this.overCurrentCell[1] = j ; 
       }
     }    
-  }   
+  }
+  
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    this.desplayedMatrix = this.tablePagingService.setPageByKey(event.keyCode);
+  }
 }

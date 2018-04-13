@@ -34,6 +34,43 @@ export class TablePagingService {
     return this.calculateData();
   }
 
+  setPageByKey(keyCode){
+    var dataChanged = false;
+    switch (keyCode){
+      case 38:
+        if(this.pagingObj.currentTopRow !== 0){
+          this.pagingObj.currentTopRow--;
+          dataChanged = true;
+        }
+        break;
+      case 40:
+        if(this.pagingObj.currentTopRow + this.pagingObj.maxItemDisplayed !== this.pagingObj.totalRows){
+          this.pagingObj.currentTopRow++;
+          dataChanged = true;          
+        }
+        break;
+      case 37:
+        if(this.pagingObj.currentLeftColumn !== 0){
+          this.pagingObj.currentLeftColumn--;
+          dataChanged = true;
+        }
+        break;
+      case 39:
+        if(this.pagingObj.currentLeftColumn + this.pagingObj.maxItemDisplayed !== this.pagingObj.totalColumns){
+          this.pagingObj.currentLeftColumn++;        
+          dataChanged = true;          
+        }
+        break;
+    }
+
+    if (dataChanged){
+      return this.calculateData();      
+    }
+    else{
+      return this.desplayedMatrix;
+    }
+  }
+
   initializeTablePaging(matrix){
     this.pagingObj = {
       currentTopRow: 0, 

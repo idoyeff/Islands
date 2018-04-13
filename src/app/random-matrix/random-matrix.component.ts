@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { IslandsService } from '.././islands.service';
 import { UtilitiesService } from '.././utilities.service';
 import { TablePagingService } from '.././table-paging.service';
@@ -59,5 +59,10 @@ export class RandomMatrixComponent implements OnInit {
   
   restart(){
     this.islandsService.restart();
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    this.desplayedMatrix = this.tablePagingService.setPageByKey(event.keyCode);
   }
 }
