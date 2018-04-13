@@ -1,16 +1,13 @@
 .islands-table-container{
     text-align:center; 
-    overflow: auto;
-    overflow-y: auto;
-    overflow-x: auto;
-    max-height: 600px;
-    max-width: 600px;
-    height: 600px;
+    overflow: hidden;       
+    height: 565px;
+    margin: 30px;
 
 }
 
 .islands-table { 
-    border:5px solid #333; 
+    /*border:5px solid #333;*/
     border-collapse: collapse; 
     table-layout: fixed;
     margin: auto;
@@ -51,3 +48,63 @@
     margin-top: 10px; 
     font-weight: bold;
 } 
+
+.arrow-up {
+    position: absolute;     
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;    
+    border-bottom: 20px solid steelblue;
+    margin-left: 250px;
+    margin-top: -28px;
+}
+
+.arrow-down {
+    position: absolute;         
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid steelblue;
+    margin-left: 250px;
+    margin-top: 10px;
+}
+
+.arrow-right {
+    position: absolute;     
+    width: 0; 
+    height: 0; 
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid steelblue;
+    margin-left: 540px;
+    margin-top: 243px;
+}
+
+.arrow-left {
+    position: absolute;     
+    width: 0; 
+    height: 0; 
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent; 
+    border-right:20px solid steelblue; 
+    margin-left: -20px;
+    margin-top: 243px;
+}
+
+.disabled-arrow-up {
+    border-bottom: 20px solid lightgray;
+}
+
+.disabled-arrow-down {
+    border-top: 20px solid lightgray;
+}
+
+.disabled-arrow-left {
+    border-right: 20px solid lightgray;
+}
+
+.disabled-arrow-right {
+    border-left:20px solid lightgray; 
+}

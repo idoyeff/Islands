@@ -11,6 +11,7 @@ import { CreateMatrixComponent } from './create-matrix/create-matrix.component';
 import { IslandsService } from './islands.service';
 import { UtilitiesService } from './utilities.service';
 import { MatrixGeneratorService } from './matrix-generator.service';
+import { TablePagingService } from './table-paging.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { MatrixGeneratorService } from './matrix-generator.service';
   ],
   imports: [
     BrowserModule,
-    FormsModule,    
+    FormsModule,        
     RouterModule.forRoot([
       {
         path: '',
@@ -48,7 +49,8 @@ import { MatrixGeneratorService } from './matrix-generator.service';
   providers: [
     IslandsService, 
     UtilitiesService,
-    MatrixGeneratorService
+    MatrixGeneratorService,
+    TablePagingService
   ],
   bootstrap: [AppComponent]
 })

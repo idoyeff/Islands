@@ -4,14 +4,25 @@ import { MatrixGeneratorService } from './matrix-generator.service';
 @Injectable()
 export class IslandsService {
   matrix = [];
+  desplayedMatrix = [];
   rowSize = 0;
   columnSize = 0;
   islandsCounter = 2;  
+  maxItemDisplayed = 90;
+  currentPage = 0;
+  currentLeftPage = 0;
+  scrollLeftPosition = 0;
+  scrollTopPosition = 0;  
+  numOfTopPages = 0;
+  numOfLeftPages = 0;  
+  resultObj = {desplayedMatrix: [], displayCell: 0, currentPage: 0};
 
   constructor(private matrixGeneratorService:MatrixGeneratorService) { }
 
   getRandomIslandsMatrix() {
     this.matrix = this.matrixGeneratorService.getMatrixWithRandomBinary(this.rowSize, this.columnSize);
+    this.numOfTopPages = this.matrix.length;
+    this.numOfLeftPages = this.matrix[0].length;    
     return this.matrix;    
   }
 
@@ -31,9 +42,29 @@ export class IslandsService {
 
   restart(){
     this.matrix = [];
+    this.desplayedMatrix = [];    
     this.rowSize = 0;
     this.columnSize = 0;
     this.islandsCounter = 2;
+    this.currentPage = 0;
+    this.currentLeftPage = 0;
+    this.scrollLeftPosition = 0;
+    this.scrollTopPosition = 0;
+  }
+
+  getCounter(){   
+    var rowArray = [];
+    var columnArray = [];
+    
+    for(var i=0; i<100; i++){
+      rowArray.push(i);
+    }
+
+    for(var i=0; i<100; i++){
+      columnArray.push(i);
+    }
+
+    return [rowArray, columnArray];
   }
 
   setMatrixSize(rowSize, columnSize){   
@@ -126,6 +157,71 @@ export class IslandsService {
       }
 
       return neighbors;
+  }
+
+  tableScroll(scrollTop, scrollLeft){    
+    if(this.scrollTopPosition !== scrollTop && scrollTop != 0){
+      this.currentPage++;
+      if(this.currentPage !== 0){
+        this.resultObj.displayCell = 30;
+      }
+
+      var firstCellTop = this.currentPage * 30;
+      var maxSize = Math.min(this.matrix.length, firstCellTop + 90);             
+      this.resultObj.desplayedMatrix = this.matrix.slice(firstCellTop, maxSize);
+      this.resultObj.currentPage = this.currentPage;
+
+      
+  
+    }
+    else if(this.scrollLeftPosition !== scrollLeft){
+
+
+    }
+
+    return this.resultObj;
+    
+
+    /*if(this.scrollTopPosition !== scrollTop){      
+      this.scrollTopPosition = scrollTop
+
+      var cellsHiddenTop = Math.floor(scrollTop / 21) + (this.currentPage) * 30;
+      var currentPage = Math.floor(cellsHiddenTop / 30);
+      if(currentPage === this.currentPage){
+        return [];
+      }
+      this.currentPage = currentPage;
+      
+      var firstCellTop = (currentPage * 30) + 30;
+      var maxSize = Math.min(this.matrix.length, firstCellTop + this.maxItemDisplayed);     
+      return this.matrix.slice(firstCellTop, maxSize);
+    }
+    else if(this.scrollLeftPosition !== scrollLeft){
+      this.scrollLeftPosition = scrollLeft
+
+      var cellsHiddenLeft = Math.floor(scrollLeft / 21) + (this.currentLeftPage) * 30;
+      var currentLeftPage = Math.floor(cellsHiddenLeft / 30);
+      if(currentLeftPage === this.currentLeftPage){
+        return [];
+      }
+
+      this.currentLeftPage = currentLeftPage;
+      
+      var firstCell = (currentLeftPage * 30) + 30;
+      var maxSize = Math.min(this.matrix[0].length, firstCell + this.maxItemDisplayed);     
+
+      var firstCellTop = currentPage * 30;
+      var maxSizeTop = Math.min(this.matrix.length, firstCell + this.maxItemDisplayed);   
+
+      this.desplayedMatrix = this.matrix.slice(firstCell, maxSize);
+
+      var newMatrix = [];
+      for (var i = 0; this.desplayedMatrix.length; i++){
+        this.desplayedMatrix [i] = this.desplayedMatrix[i].slice(firstCell, maxSize);
+      }      
+
+      return this.desplayedMatrix;
+    }*/
   }
 
   /*recursive solution*/
