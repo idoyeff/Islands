@@ -9,7 +9,6 @@
           <td *ngFor="let mElement of nElement; let j = index" (click)="cellClicked(i, j)" (mouseover)="drawCells(i, j, $event)" [style.background-color]="getColor(mElement)"></td>
       </tr>       
     </table>
-    <div class="last-cell-clicked" [style.margin-left]="pagingObj.totalColumns <= pagingObj.maxItemDisplayed? '250px' : ''" [hidden]="lastCellClicked.length == 0">({{lastCellClicked[0]}},{{lastCellClicked[1]}})</div>
     <div class="arrow-down" (click)="pagingObj.currentTopRow + pagingObj.maxItemDisplayed !== pagingObj.totalRows? setPage('down') : ''"             
             [hidden]="pagingObj.currentTopRow + pagingObj.maxItemDisplayed == pagingObj.totalRows || pagingObj.totalRows <=  pagingObj.maxItemDisplayed"></div>
         
@@ -27,4 +26,5 @@
   <div class="restart-button-container">
     <button [routerLink]="['/']" class="button-properties" (click)="restart()">RESTART</button>
   </div>
+  <div class="last-cell-clicked" [style.margin-left]="pagingObj.totalColumns <= pagingObj.maxItemDisplayed? '250px' : ''" [hidden]="lastCellClicked.length == 0">({{lastCellClicked[0]}},{{lastCellClicked[1]}})</div>  
 </div>
